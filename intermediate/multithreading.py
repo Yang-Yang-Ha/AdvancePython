@@ -5,16 +5,18 @@ from time import sleep
 
 import sys_logging
 
-# This returns the number of alive(currently) Thread objects.
-# This is equal to the length the of the list that enumerate() returns.
-sys_logging.info(f'threading.active_count() = {threading.active_count()}')
-sys_logging.info(f'current thread = {threading.current_thread()}')
-sys_logging.info(f'current thread id = {threading.get_ident()}')
-# This returns a list of all alive(currently) Thread objects.
-# This includes the main thread, daemonic threads, and dummy thread objects created by current_thread().
-# This obviously doesn’t include terminated threads as well as those that haven’t begun yet.
-sys_logging.info(f'thread enumerate = {threading.enumerate()}')
-sys_logging.info(f'main thread = {threading.main_thread()}')
+
+def thread_basic_print():
+    # This returns the number of alive(currently) Thread objects.
+    # This is equal to the length the of the list that enumerate() returns.
+    sys_logging.info(f'threading.active_count() = {threading.active_count()}')
+    sys_logging.info(f'current thread = {threading.current_thread()}')
+    sys_logging.info(f'current thread id = {threading.get_ident()}')
+    # This returns a list of all alive(currently) Thread objects.
+    # This includes the main thread, daemonic threads, and dummy thread objects created by current_thread().
+    # This obviously doesn’t include terminated threads as well as those that haven’t begun yet.
+    sys_logging.info(f'thread enumerate = {threading.enumerate()}')
+    sys_logging.info(f'main thread = {threading.main_thread()}')
 
 
 def function_one(arg, name):
@@ -115,14 +117,52 @@ def test_lock():
     sys_logging.info(f'second time lock {lock.acquire()}')
 
 
+def event_task(event):
+    event_set = event.wait()
+    sys_logging.info(f'{threading.current_thread()}')
+    if event_set:
+        sys_logging.info(f'Event received, releasing thread...')
+    else:
+        sys_logging.info(f'Time out, moving ahead without event')
+
+
 def event_object():
+    # initialize the event object
+    e = threading.Event()
+
+    # starting the thread
+    event_threading_one = Thread(name='Event-Blocking-Thread-one', target=event_task, args=(e,))
+    event_threading_one.start()
+
+    event_threading_two = Thread(name='Event-Blocking-Thread-two', target=event_task, args=(e,))
+    event_threading_two.start()
+    sleep(5)
+    e.set()
+
+
+def timer_task():
+    sys_logging.info(f'Timer object is getting executed')
+
+
+def timer_object():
+    # timer class is the subclass of Thread
+    timer_thread = threading.Timer(5, timer_task)
+    timer_thread.start()
+    sleep(6)
+
+
+def condition_object():
     pass
 
 
 if __name__ == '__main__':
+    # thread_basic_print()
     # thread_method()
     # lock_method()
     # test_lock()
     # line_one, line_second = rlock_method()
     # sys_logging.info(f'line one = {line_one} \n line two = {line_second}')
-    event_object()
+    # event_object()
+    # timer_object()
+    condition_object()
+    sys_logging.info(f'main thread finished')
