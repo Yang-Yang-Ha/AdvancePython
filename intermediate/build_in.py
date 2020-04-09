@@ -48,3 +48,4 @@ sys_logging.info(f'round(3.777,2) = {round(3.777, 2)}')
 # repr()
 st = 'Hello'
 sys_logging.info(f'repr(st) = {repr(st)}')
+sys_logging.info(f"{st.join(['1', '2'])}")
