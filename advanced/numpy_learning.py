@@ -156,6 +156,216 @@ def indexing_and_slicing():
     sys_logging.info(b[..., 1:])
 
 
+def broadcasting():
+    a = np.array([1, 2, 3])
+    b = np.array([[0, 0, 0], [10, 20, 30]])
+    sys_logging.info(a + b)
+
+
+def iterating_over_array():
+    a = np.arange(0, 60, 5)
+    a = a.reshape(3, 4)
+    sys_logging.info(a)
+    for x in np.nditer(a, flags=['c_index']):
+        sys_logging.info(x)
+
+    # broadcasting iterating
+    sys_logging.info(f'start broadcasting iterating')
+    b = np.array([1, 2, 3, 4])
+    for x, y in np.nditer([a, b]):
+        sys_logging.info(f'{x}:{y}')
+
+
+def stack():
+    a = np.array([[1, 2], [3, 4]])
+    b = np.array([[5, 6], [7, 8]])
+    sys_logging.info(f'hstack \n {np.hstack((a, b))}')
+    sys_logging.info(f'vstack \n {np.vstack((a, b))}')
+    sys_logging.info(f'stack axis = 0 \n {np.stack((a, b))}')
+    sys_logging.info(f'stack axis = 1 \n {np.stack((a, b), axis=1)}')
+
+
+def joining_arrays():
+    # concatenate: Joins a sequence of arrays along an existing axis
+    # stack: Joins a sequence of arrays along a new axis
+    # hstack: Stacks array in sequence horizontally(column wise)
+    # vstack: Stacks array in sequence vertically(row wise)
+    concatenate()
+
+    stack()
+
+
+def concatenate():
+    a = np.array([[1, 2], [3, 4]])
+    b = np.array([[5, 6], [7, 8]])
+    sys_logging.info(f'concatenate axis = 0 \n {np.concatenate((a, b))}')
+    sys_logging.info(f'concatenate axis = 1 \n {np.concatenate((a, b), axis=1)}')
+
+
+def splitting_arrays():
+    # split(array, indices or sections, axis): splits an array into multiple sub-arrays
+    # hsplit: splits an array into multiple sub-arrays horizontally,
+    # is a special case of split() function
+    # where axis is 1 indicating a horizontal split regardless of the dimension of the input array.
+    # vsplit: splits an array into multiple sub-arrays vertically,
+    # is a special case of split() function
+    # where axis is 1 indicating a vertical split regardless of the dimension of the input array.
+    a = np.arange(9)
+    b = np.split(a, 3)
+    c = np.split(a, [4, 7])
+    sys_logging.info(f'b_type = {type(b)} b = {b}')
+    sys_logging.info(f'c_type = {type(c)} c = {c}')
+    d = np.arange(16).reshape((4, 4))
+    sys_logging.info(f'np.vsplite(d, 2) = {np.vsplit(d, 2)}')
+
+
+def adding_or_removing_elements():
+    # resize: returns a new array with a specified shape
+    # append: appends the values to the end of an array
+    # insert(array, index, value, axis): inserts the values along the given axis before the given indices
+    # delete: returns a new array with sub-arrays along an axis deleted
+    # unique(array, return_index, return_inverse, return_counts): finds the unique elements of an array
+    resize()
+
+    append()
+
+    insert()
+
+    delete()
+
+    unique()
+
+
+def unique():
+    sys_logging.info('np.unique')
+    a = np.array([5, 2, 6, 2, 7, 5, 6, 8, 2, 9])
+    sys_logging.info(f'a = {a}')
+    sys_logging.info(np.unique(a))
+    u, indices = np.unique(a, return_index=True)
+    sys_logging.info(f'u = {u}, indices = {indices}')
+    u, indices = np.unique(a, return_inverse=True)
+    sys_logging.info(f'u = {u}, indices = {indices}')
+    sys_logging.info(f'u[indices] = {u[indices]}')
+    u, indices = np.unique(a, return_counts=True)
+    sys_logging.info(f'u = {u}, indices = {indices}')
+
+
+def delete():
+    sys_logging.info('np.delete')
+    d = np.arange(12).reshape((3, 4))
+    sys_logging.info(d)
+    sys_logging.info(np.delete(d, 5))
+    sys_logging.info(np.delete(d, 1, axis=0))
+    e = np.arange(10)
+    sys_logging.info(np.delete(e, np.s_[::2]))
+
+
+def insert():
+    sys_logging.info('np.insert')
+    c = np.array([[1, 2], [3, 4], [5, 6]])
+    sys_logging.info(np.insert(c, 3, [7, 8]))
+    sys_logging.info(np.insert(c, 3, [7, 8], axis=0))
+    sys_logging.info(np.insert(c, 2, [7, 8, 9], axis=1))
+
+
+def append():
+    sys_logging.info('np.append')
+    b = np.array([[1, 2, 3], [4, 5, 6]])
+    sys_logging.info(np.append(b, [7, 8, 9]))
+    sys_logging.info(np.append(b, [[7, 8, 9]], axis=0))
+    sys_logging.info(np.append(b, [[5, 5, 5], [7, 8, 9]], axis=1))
+
+
+def resize():
+    sys_logging.info('np.resize')
+    a = np.arange(6)
+    sys_logging.info(np.resize(a, (2, 8)))
+
+
+def array_manipulation():
+    change_shapes()
+
+    transpose_operation()
+
+    change_dimensions()
+
+    joining_arrays()
+
+    splitting_arrays()
+
+    adding_or_removing_elements()
+
+
+def change_dimensions():
+    # Changing dimensions
+    # broadcast: Produce an object that mimics broadcasting
+    # broadcast_to: Broadcast an array to a new shape
+    # expand_dims: Expands the shape of an array
+    # squeeze: Removes single-dimensional entries from the shape of array
+    sys_logging.info(f'Changing dimensions')
+    broadcast()
+    broadcast_to()
+    expand_dims()
+    squeeze()
+
+
+def squeeze():
+    h = np.arange(9).reshape((1, 3, 3))
+    h_squeeze = np.squeeze(h)
+    sys_logging.info(f'\n {h}')
+    sys_logging.info(f'\n {h_squeeze}')
+
+
+def expand_dims():
+    d = np.array([[1, 2], [3, 4]])
+    e = np.expand_dims(d, axis=0)
+    f = np.expand_dims(d, axis=1)
+    g = np.expand_dims(d, axis=2)
+    sys_logging.info(f'shape = {e.shape} \n {e}')
+    sys_logging.info(f'shape = {f.shape} \n {f}')
+    sys_logging.info(f'shape = {g.shape} \n {g}')
+
+
+def broadcast_to():
+    c = np.arange(4).reshape(1, 4)
+    c_broadcast = np.broadcast_to(c, (4, 4))
+    sys_logging.info(c_broadcast)
+
+
+def broadcast():
+    x = np.array([[1], [2], [3]])
+    y = np.array([4, 5, 6])
+    b = np.broadcast(x, y)
+    for i in b:
+        sys_logging.info(i)
+    sys_logging.info(x + y)
+
+
+def transpose_operation():
+    # transpose operation
+    # transpose(): np.transpose(ndarray), permutes the dimensions of an array
+    # ndarray.T: Same as self.transpose
+    # rollaxis: rolls the specified axis backwards
+    # swapaxis: Interchange the two axis of an array
+    sys_logging.info(f'Transpose operation')
+    a = np.arange(0, 60, 5)
+    a = a.reshape(3, 4)
+    sys_logging.info(a.T)
+
+
+def change_shapes():
+    # changing shapes:
+    # reshape(): Gives a new shape to an array without changing its data
+    # flat: A 1-D iterator over the array
+    # flatten(): returns a copy of the array collapsed into one dimension
+    # ravel(): returns a contiguous flattened array
+    a = np.arange(0, 60, 5)
+    a = a.reshape(3, 4)
+    sys_logging.info(a)
+    sys_logging.info(a.flat[3])
+    sys_logging.info(a.ravel())
+
+
 if __name__ == '__main__':
     # nd_array_object()
     # data_types()
@@ -163,4 +373,7 @@ if __name__ == '__main__':
     # array_creation_routines()
     # array_from_existing_data()
     # array_from_numerical_ranges()
-    indexing_and_slicing()
+    # indexing_and_slicing()
+    # broadcasting()
+    # iterating_over_array()
+    array_manipulation()
