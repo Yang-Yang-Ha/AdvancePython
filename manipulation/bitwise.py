@@ -19,7 +19,8 @@ binary_xor_two = 5 ^ 4
 sys_logging.info('2 ^ 3 = ' + str(binary_xor_one))
 sys_logging.info('5 ^ 4 = ' + str(binary_xor_two))
 
-# binary's complement(~) It flips the bits. Binary for 2 is 00000010. Its one’s complement is 11111101. This is binary for -3.
+# binary's complement(~) It flips the bits. Binary for 2 is 00000010. Its one’s complement is 11111101.
+# This is binary for -3.
 binary_complement = ~3
 sys_logging.info('~3 = ' + str(binary_complement))
 

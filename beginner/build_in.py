@@ -3,7 +3,8 @@ import sys_logging
 # abs() returns the absolute value of a number. A negative value’s absolute is that value is positive.
 sys_logging.info(f'abs(-7) = {abs(-7)}')
 
-# all() returns True if all values in a python iterable have a Boolean value of True.An empty value has a Boolean value of False.
+# all() returns True if all values in a python iterable have a Boolean value of True.
+# An empty value has a Boolean value of False.
 sys_logging.info(f'all([1, 0]) = {all([1, 0])}')
 
 # any() takes one argument and returns True if, even one value in the iterable has a Boolean value of True.
@@ -18,7 +19,7 @@ a.append(2)
 sys_logging.info(f'bytearray = {a}')
 
 # bytes() returns an immutable bytes object.
-b = bytes('hello', 'utf-8')
+b = bytes([4, ])
 sys_logging.info(f'bytes = {b}')
 
 # callable() A function is callable, a list is not.
@@ -49,3 +50,11 @@ sys_logging.info(f'round(3.777,2) = {round(3.777, 2)}')
 st = 'Hello'
 sys_logging.info(f'repr(st) = {repr(st)}')
 sys_logging.info(f"{st.join(['1', '2'])}")
+
+# isalnum()
+alphanumeric = 'Hello'
+sys_logging.info(f'isalnum {alphanumeric.isalnum()}')
+
+# input_number = input('Please enter a number: ')
+# input_number *= 2
+# sys_logging.info(f"int convert {int(input_number)}")

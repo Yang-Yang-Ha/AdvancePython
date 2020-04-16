@@ -14,7 +14,7 @@ sys_logging.info(f'current work directory: {os.getcwd()}')
 sys_logging.info(f'file list {os.listdir()}')
 
 # read file
-with open('build_in.py') as file:
+with open('../beginner/build_in.py') as file:
     # sys_logging.info(file.read(5))
     # sys_logging.info(file.tell())
     # sys_logging.info(file.seek(0))

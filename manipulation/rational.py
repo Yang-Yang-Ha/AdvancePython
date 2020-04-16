@@ -25,4 +25,3 @@ sys_logging.info("equal to: 0.5 == False - " + str(equal_to_five))
 
 not_equal = 1 != 1.0
 sys_logging.info("not equal: 1 != 1.0 - " + str(not_equal))
-
