@@ -1,6 +1,9 @@
 import sys_logging
 
 
+# Python Sequence and Collection
+# Sequence include: String, List, tuple, Bytes Sequence, Bytes Array, and range()
+# Collection include: set and dictionary
 # list data
 def create_list():
     # python list can hold different types of values
@@ -93,6 +96,9 @@ def built_in_method():
     sys_logging.info(f'a.sort() = {a}')
     a.reverse()
     sys_logging.info(f'a.reverse() = {a}')
+    b = [8, 2]
+    a.extend(b)
+    sys_logging.info(f'a.extend(b) = {a}')
     a.clear()
     sys_logging.info(f'a.clear() = {a}')
 
@@ -243,7 +249,7 @@ def dictionary_data():
 
 
 if __name__ == '__main__':
-    # list_data()
+    list_data()
     # tuple_data()
-    set_data()
+    # set_data()
     # dictionary_data()
