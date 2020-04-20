@@ -19,7 +19,7 @@ newFunc()
 
 
 # Python decorator with parameters
-def checkZero(func):
+def check_zero(func):
     def wrapper(a, b):
         if b == 0:
             sys_logging.error('Can not divide 0')
@@ -29,7 +29,7 @@ def checkZero(func):
     return wrapper
 
 
-@checkZero
+@check_zero
 def divide(a, b):
     return a / b
 
